@@ -6,6 +6,11 @@ export default function ProductDetailPage({ product }) {
   const router = useRouter()
   const { id } = router.query
 
+  // fallback: true 처리할 경우 product가 사전 렌더링 되지 않기 때문에 undefined 처리를 해주어야 함
+  if (!product) {
+    return <p>...Loading</p>
+  }
+
   return (
     <div>
       <h1>{product.title}</h1>
@@ -24,16 +29,8 @@ export async function getStaticProps(context) {
 
   const product = products.find((product) => product.id === productId)
 
-  if (product.length === 0) {
-    return { notFound: true }
-  }
-
   if (!product) {
-    return {
-      redirect: {
-        destination: '/no-data',
-      },
-    }
+    return { notFound: true }
   }
 
   return { props: { product } }
@@ -42,11 +39,9 @@ export async function getStaticProps(context) {
 // 동적 페이지에서 어떤 인스턴스를 전달할 지 정보를 주는 함수
 export async function getStaticPaths() {
   return {
-    paths: [
-      { params: { id: 'p1' } },
-      { params: { id: 'p2' } },
-      { params: { id: 'p3' } },
-    ],
-    fallback: false,
+    paths: [{ params: { id: 'p1' } }],
+    // 일부 페이지만 사전 렌더링
+    // fallback을 문자열로 처리할 경우 loading 처리를 따로 하지 않아도 됨.
+    fallback: 'blocking',
   }
 }
