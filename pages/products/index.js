@@ -1,3 +1,6 @@
+import fs from 'fs/promises'
+import path from 'path'
+
 export default function ProductsPage({ products }) {
   return (
     <ul>
@@ -17,13 +20,19 @@ export default function ProductsPage({ products }) {
 - 서버 사이드 함수이기 떄문에 자바스크립트 파일에서 볼 수 없다.
 */
 export async function getStaticProps() {
+  // process.cwd() 현재 디렉토리 (= 루트)
+  // 파일에 대한 절대경로 구축
+  const filePath = path.join(process.cwd(), 'data', 'dummy-backend.json')
+
+  // 프로미스를 반환하는 비동기 함수
+  const jsonData = await fs.readFile(filePath)
+
+  // json data를 가져와서 JavaScript 객체로 변환
+  const { products } = JSON.parse(jsonData)
+
   return {
     props: {
-      products: [
-        { id: 'p1', title: 'Product 1' },
-        { id: 'p2', title: 'Product 2' },
-        { id: 'p3', title: 'Product 3' },
-      ],
+      products,
     },
   }
 }
