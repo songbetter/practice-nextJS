@@ -41,7 +41,7 @@ export default function EventSearch({ onSearch }) {
           </select>
         </div>
       </div>
-      <Button />
+      <Button>검색</Button>
     </form>
   )
 }
