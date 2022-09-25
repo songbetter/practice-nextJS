@@ -14,6 +14,9 @@ export default function HomePage() {
         <li>
           <Link href="/events">EventsPage</Link>
         </li>
+        <li>
+          <Link href="/products">ProductsPage</Link>
+        </li>
       </ul>
     </div>
   )

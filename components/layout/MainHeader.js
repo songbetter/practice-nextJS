@@ -11,6 +11,9 @@ export default function MainHeader() {
           <li>
             <Link href="/events">All Events</Link>
           </li>
+          <li>
+            <Link href="/products">All Products</Link>
+          </li>
         </ul>
       </nav>
     </header>
