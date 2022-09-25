@@ -1,11 +1,7 @@
-import { useRouter } from 'next/router'
 import path from 'path'
 import fs from 'fs/promises'
 
 export default function ProductDetailPage({ product }) {
-  const router = useRouter()
-  const { id } = router.query
-
   // fallback: true 처리할 경우 product가 사전 렌더링 되지 않기 때문에 undefined 처리를 해주어야 함
   if (!product) {
     return <p>...Loading</p>
