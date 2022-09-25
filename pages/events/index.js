@@ -1,15 +1,24 @@
 import Link from 'next/link'
-import EventList from '../../components/EventList'
+import { useRouter } from 'next/router'
+import EventList from '../../components/event/EventList'
+import EventSearch from '../../components/event/EventSearch'
 
 export default function EventsPage() {
+  const router = useRouter()
+
+  function findEventsHandler(year, month) {
+    const fullPath = `/events/${year}/${month}`
+    router.push(fullPath)
+  }
   return (
     <div>
+      <EventSearch onSearch={findEventsHandler} />
       <EventList items={EVENT_LIST} />
     </div>
   )
 }
 
-const EVENT_LIST = [
+export const EVENT_LIST = [
   {
     id: 0,
     title: '봄',
