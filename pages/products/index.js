@@ -30,9 +30,22 @@ export async function getStaticProps() {
   // json data를 가져와서 JavaScript 객체로 변환
   const { products } = JSON.parse(jsonData)
 
+  if (products.length === 0) {
+    return { notFound: true }
+  }
+
+  if (!products) {
+    return {
+      redirect: {
+        destination: '/no-data',
+      },
+    }
+  }
   return {
     props: {
       products,
     },
+    // 10초 마다 재생성 (ISR)
+    // revalidate: 10,
   }
 }
