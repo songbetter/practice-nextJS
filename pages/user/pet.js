@@ -1,11 +1,8 @@
 import { useEffect, useState } from 'react'
 
-export default function UserPetPage() {
-  // 사전 렌더링을 하지 않기때문에 기본값으로 설정한 값이 소스코드에 포함된다.
-  const [pet, setPet] = useState({
-    name: '',
-    option: { age: 0, breed: '', gender: '' },
-  })
+export default function UserPetPage(props) {
+  // 사전 렌더링 후 기본값으로 설정한다.
+  const [pet, setPet] = useState(props.pet)
   const [isLoading, setIsLoading] = useState(false)
 
   useEffect(() => {
@@ -33,4 +30,18 @@ export default function UserPetPage() {
       <p>gender: {pet.option.gender}</p>
     </div>
   )
+}
+
+export async function getStaticProps() {
+  const response = await fetch(
+    'https://practice-next-js-3bb89-default-rtdb.firebaseio.com/order.json',
+  )
+  const data = await response.json()
+
+  return {
+    props: {
+      pet: data,
+    },
+    revalidate: 10,
+  }
 }
