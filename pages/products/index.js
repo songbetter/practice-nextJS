@@ -1,9 +1,19 @@
 import fs from 'fs/promises'
+import Head from 'next/head'
 import path from 'path'
+import { Fragment } from 'react'
 import ProductsList from '../../components/product/ProductList'
 
 export default function ProductsPage({ products }) {
-  return <ProductsList items={products} />
+  return (
+    <Fragment>
+      {/* _app.js에서 title을 지정했더라도 페이지별로 추가할 수 있다. 가장 최신의 title 하나만 반영된다. */}
+      <Head>
+        <title>ProductsPage</title>
+      </Head>
+      <ProductsList items={products} />
+    </Fragment>
+  )
 }
 
 /* 

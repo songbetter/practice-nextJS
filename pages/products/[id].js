@@ -1,16 +1,24 @@
 import path from 'path'
 import fs from 'fs/promises'
+import { Fragment } from 'react'
+import Head from 'next/head'
 
 export default function ProductDetailPage({ product }) {
   // fallback: true 처리할 경우 product가 사전 렌더링 되지 않기 때문에 undefined 처리를 해주어야 함
-  if (!product) {
-    return <p>...Loading</p>
+  if (product) {
+    return (
+      <Fragment>
+        <ProductDetailPageHead />
+        <p>...Loading</p>
+      </Fragment>
+    )
   }
 
   return (
-    <div>
+    <Fragment>
+      <ProductDetailPageHead />
       <h1>{product.title}</h1>
-    </div>
+    </Fragment>
   )
 }
 
@@ -41,3 +49,9 @@ export async function getStaticPaths() {
     fallback: 'blocking',
   }
 }
+
+const ProductDetailPageHead = () => (
+  <Head>
+    <title>ProductDetailPage</title>
+  </Head>
+)
