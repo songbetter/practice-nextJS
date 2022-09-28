@@ -1,10 +1,25 @@
+import { Fragment } from 'react'
 import { buildEmailPath, extractEmail } from '../api/email'
+import Button from '../../components/ui/button'
 
 export default function Subscriptions({ emailList }) {
+  function showDetailHandler(id) {
+    fetch(`/api/${id}`, {
+      headers: {
+        // json 데이터를 전달한다는 점을 명확히 하기
+        'Content-Type': 'application/json',
+      },
+    }).then((response) => response.json().then((data) => console.log(data)))
+  }
   return (
     <ul>
       {emailList.map((item) => (
-        <li key={item.id}>{item.email}</li>
+        <Fragment key={item.id}>
+          <li>{item.email}</li>
+          <Button onClick={() => showDetailHandler(item.id)}>
+            Show Detail
+          </Button>
+        </Fragment>
       ))}
     </ul>
   )
