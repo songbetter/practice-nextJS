@@ -1,4 +1,4 @@
-import { buildEmailPath, extractEmail } from './email'
+import { buildEmailPath, extractEmail } from '.'
 
 export default function handler(req, res) {
   const { query } = req
