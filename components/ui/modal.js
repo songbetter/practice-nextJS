@@ -1,4 +1,5 @@
 import { useContext } from 'react'
+import ReactDOM from 'react-dom'
 
 import { ModalContext } from '../../store/modal-context'
 import Button from './button'
@@ -6,7 +7,7 @@ import Button from './button'
 export default function Modal({ children }) {
   const { closeModal } = useContext(ModalContext)
 
-  return (
+  return ReactDOM.createPortal(
     <ModalBackground>
       <ModalBox>
         <div
@@ -21,7 +22,8 @@ export default function Modal({ children }) {
           {children}
         </div>
       </ModalBox>
-    </ModalBackground>
+    </ModalBackground>,
+    document.getElementById('modal'),
   )
 }
 

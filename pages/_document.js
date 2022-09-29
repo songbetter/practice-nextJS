@@ -12,6 +12,7 @@ class MyDocument extends Document {
           {/* portals 구현 시 overlay 추가해서 root 외부에 접근할 수 있다. */}
           <Main />
           <NextScript />
+          <div id="modal" />
         </body>
       </Html>
     )
