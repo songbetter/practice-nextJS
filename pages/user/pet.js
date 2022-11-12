@@ -24,10 +24,10 @@ export default function UserPetPage(props) {
 
   return (
     <div>
-      <h1>{pet.name}</h1>
-      <p>age: {pet.option.age}</p>
-      <p>breed: {pet.option.breed}</p>
-      <p>gender: {pet.option.gender}</p>
+      <h1>{pet?.name || ''}</h1>
+      <p>age: {pet?.option?.age || 0}</p>
+      <p>breed: {pet?.option?.breed || ''}</p>
+      <p>gender: {pet?.option?.gender || 0}</p>
     </div>
   )
 }
